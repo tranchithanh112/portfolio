@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(npx create-next-app@latest D:\\\\Training\\\\portfolio --typescript --tailwind --eslint --app --src-dir --no-import-alias --use-npm)"
+    ]
+  }
+}
