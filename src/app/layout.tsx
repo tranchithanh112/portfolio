@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Thành Trần — Maritime Technical Support",
+  title: "Thành Trần — Technical Support & Application Operations",
   description:
-    "Maritime software professional with nearly 4 years supporting business-critical systems across ~200 vessels. Incident triage, root-cause analysis, remote troubleshooting.",
+    "Technical support professional with 4 years supporting business-critical B2B software across ~200 vessels. Incident triage, root-cause analysis, remote troubleshooting.",
 };
 
 export default function RootLayout({

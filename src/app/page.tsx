@@ -8,6 +8,7 @@ export default function Home() {
             TT<span className="text-cyan-400">.</span>
           </a>
           <div className="flex gap-5 text-sm text-slate-400">
+            <a href="#cases" className="hover:text-cyan-400 transition-colors">Cases</a>
             <a href="#experience" className="hover:text-cyan-400 transition-colors">Experience</a>
             <a href="#skills" className="hover:text-cyan-400 transition-colors">Skills</a>
             <a href="#contact" className="hover:text-cyan-400 transition-colors">Contact</a>
@@ -25,12 +26,12 @@ export default function Home() {
             Thành Trần
           </h1>
           <p className="text-lg text-slate-400 mb-6 animate-fade-in-up animation-delay-400">
-            Maritime Technical Support &middot; Application Operations &middot; Hai Phong, Vietnam
+            Technical Support &amp; Application Operations &middot; B2B Software &middot; UTC+7
           </p>
           <p className="leading-relaxed max-w-2xl animate-fade-in-up animation-delay-400">
-            Maritime software professional with nearly 4 years of experience supporting
-            business-critical systems across ~200 vessels, 20+ client organizations
-            and 200+ users. Skilled in incident triage, root-cause analysis, remote
+            Technical support professional with 4 years of experience supporting
+            business-critical B2B software, most recently maritime systems used across
+            ~200 vessels, 20+ client organizations and 200+ users. Skilled in incident triage, root-cause analysis, remote
             troubleshooting, connectivity-aware operations and clear user communication.
           </p>
           <div className="flex gap-3 mt-6 animate-fade-in-up animation-delay-600">
@@ -85,6 +86,155 @@ export default function Home() {
 
         <hr className="border-slate-800" />
 
+        {/* Case Studies */}
+        <section id="cases" className="py-16">
+          <h2 className="text-xl font-semibold text-white mb-8 flex items-center gap-3">
+            <span className="w-6 h-[2px] bg-cyan-400 inline-block" />
+            Support Case Studies
+          </h2>
+
+          <article className="mb-6 p-5 rounded-lg border border-slate-800">
+            <p className="text-xs text-cyan-400/80 uppercase tracking-wider mb-1">Data Push Agent &middot; Fleet Management &middot; Onboard PC</p>
+            <h3 className="font-semibold text-white mb-5">Recurring agent crashes caused by a growing SQLite database</h3>
+
+            <dl className="space-y-4 text-sm leading-relaxed">
+              <div>
+                <dt className="text-white font-medium mb-1">Problem</dt>
+                <dd className="text-slate-400">
+                  The Data Push Agent runs on the onboard PC and sends vessel data to shore. On some vessels it started
+                  crashing repeatedly as its local SQLite database grew. Around 10 of ~200 vessels were affected, a new
+                  ship every few months, reported by customers through email, WhatsApp groups and our ticket system.
+                </dd>
+              </div>
+              <div>
+                <dt className="text-white font-medium mb-1">Investigation</dt>
+                <dd className="text-slate-400">
+                  Reproduced the crash in a test environment using the database copied from an affected vessel, plus
+                  generated test data.
+                </dd>
+              </div>
+              <div>
+                <dt className="text-white font-medium mb-1">Root cause</dt>
+                <dd className="text-slate-400">
+                  The data cleanup routine removed old data but never ran VACUUM, so SQLite never reclaimed the freed
+                  space. The database file kept growing until the agent crashed.
+                </dd>
+              </div>
+              <div>
+                <dt className="text-white font-medium mb-1">Fix &amp; testing</dt>
+                <dd className="text-slate-400">
+                  Added VACUUM to the cleanup routine, then ran it continuously for about two weeks in a separate test
+                  environment, checking that cleanup kept working and database size stayed under control.
+                </dd>
+              </div>
+              <div>
+                <dt className="text-white font-medium mb-1">Rollout &amp; verification</dt>
+                <dd className="text-slate-400">
+                  Took a backup before updating each vessel, installed the fix through the app&apos;s built-in Update
+                  button, then checked logs, tracked database size daily and followed up with customers.
+                </dd>
+              </div>
+              <div>
+                <dt className="text-white font-medium mb-1">Outcome</dt>
+                <dd className="text-slate-400">
+                  The agent ran normally again and, based on follow-up monitoring, the recurring crashes stopped.
+                </dd>
+              </div>
+            </dl>
+
+            <div className="mt-6 pt-5 border-t border-slate-800">
+              <p className="text-xs text-slate-500 uppercase tracking-wider mb-3">Sample customer update &middot; reconstructed for illustration</p>
+              <div className="p-4 rounded border border-slate-700 bg-slate-800/40 text-sm text-slate-300 leading-relaxed space-y-3">
+                <p className="text-slate-400">Subject: [Ticket ID] Data Push Agent crash on [Vessel] &mdash; fix ready</p>
+                <p>Hi [Name],</p>
+                <p>
+                  Thank you for reporting this and for sending us a copy of the database. Here is where things stand.
+                </p>
+                <p>
+                  <span className="text-white font-medium">What happened:</span> The Data Push Agent stopped because its
+                  local database had grown too large. Old data was being removed, but the space was never released, so
+                  the file kept growing.
+                </p>
+                <p>
+                  <span className="text-white font-medium">What we did:</span> We reproduced the problem in our test
+                  environment, fixed the cleanup routine and ran the fix for two weeks to confirm the database size stays
+                  under control.
+                </p>
+                <p>
+                  <span className="text-white font-medium">What we need from you:</span> Please let us know a time when the
+                  onboard PC is online and not in use. We will take a backup first, then install the update with the
+                  Update button in the app.
+                </p>
+                <p>
+                  <span className="text-white font-medium">Next update:</span> After the update we will check the logs and
+                  database size daily and confirm with you once everything is stable.
+                </p>
+                <p>Best regards,<br />Thanh</p>
+              </div>
+            </div>
+          </article>
+
+          <article className="p-5 rounded-lg border border-slate-800">
+            <p className="text-xs text-cyan-400/80 uppercase tracking-wider mb-1">Secure File Transfer &middot; Fleet Management Platform</p>
+            <h3 className="font-semibold text-white mb-5">Moving files between ship and shore over unstable links</h3>
+
+            <div className="flex flex-col sm:flex-row gap-2 mb-6 text-xs">
+              <div className="flex-1 p-3 rounded border border-slate-700 bg-slate-800/40">
+                <p className="text-white font-medium mb-1">Vessel</p>
+                <p className="text-slate-400">LFTP client, auto retry &amp; resume</p>
+              </div>
+              <div className="sm:w-28 flex sm:flex-col items-center justify-center gap-2 sm:gap-1 text-center text-cyan-400/80">
+                <span aria-hidden="true" className="text-base"><span className="sm:hidden">↕</span><span className="hidden sm:inline">↔</span></span>
+                <span>SFTP over unstable link</span>
+              </div>
+              <div className="flex-1 p-3 rounded border border-slate-700 bg-slate-800/40">
+                <p className="text-white font-medium mb-1">Per-vessel container</p>
+                <p className="text-slate-400">Docker, own SSH key per vessel</p>
+              </div>
+              <div className="sm:w-28 flex sm:flex-col items-center justify-center gap-2 sm:gap-1 text-center text-cyan-400/80">
+                <span aria-hidden="true" className="text-base"><span className="sm:hidden">↕</span><span className="hidden sm:inline">↔</span></span>
+                <span>Authorized users only, expires in 2h</span>
+              </div>
+              <div className="flex-1 p-3 rounded border border-slate-700 bg-slate-800/40">
+                <p className="text-white font-medium mb-1">Shore team</p>
+                <p className="text-slate-400">Access through the Fleet Management Platform</p>
+              </div>
+            </div>
+
+            <dl className="space-y-4 text-sm leading-relaxed">
+              <div>
+                <dt className="text-white font-medium mb-1">Problem</dt>
+                <dd className="text-slate-400">
+                  Vessels and shore teams needed to exchange configuration files, documents and Excel reports, but
+                  vessel internet links are limited and drop often, so transfers could break mid-way. Files from ~200
+                  vessels across 20+ client organizations also had to stay separated and visible only to the right
+                  people.
+                </dd>
+              </div>
+              <div>
+                <dt className="text-white font-medium mb-1">What I did</dt>
+                <dd>
+                  <ul className="space-y-1.5 list-disc list-inside text-slate-400">
+                    <li>Built the transfer on LFTP over SFTP, which retries and resumes automatically after a dropped connection, within a timeout</li>
+                    <li>Gave each vessel its own Docker container and SSH key, so one vessel&apos;s files and access never mix with another&apos;s</li>
+                    <li>Restricted access to authorized users and made shared folders expire automatically after two hours</li>
+                    <li>Verified file integrity with checksums and file-size comparison</li>
+                  </ul>
+                </dd>
+              </div>
+              <div>
+                <dt className="text-white font-medium mb-1">Outcome</dt>
+                <dd className="text-slate-400">
+                  Shipped as the file-transfer feature of the Fleet Management Platform, which I continue to support in
+                  production for users across the fleet.
+                </dd>
+              </div>
+            </dl>
+          </article>
+        </section>
+
+        <hr className="border-slate-800" />
+
         {/* Experience */}
         <section id="experience" className="py-16">
           <h2 className="text-xl font-semibold text-white mb-10 flex items-center gap-3">
@@ -111,20 +261,6 @@ export default function Home() {
               <li><span className="text-white font-medium">User & stakeholder communication</span> — Translate technical findings into clear actions for managers and users, maintaining ownership through escalation and closure</li>
               <li><span className="text-white font-medium">Secure access</span> — Implemented Microsoft SSO for ~70 internal users with 2FA, role mapping, session controls and account revocation</li>
             </ul>
-
-            <div className="mt-5">
-              <p className="text-xs text-slate-500 uppercase tracking-wider mb-3">Selected Solutions</p>
-              <div className="space-y-3">
-                <div>
-                  <p className="text-white font-medium text-sm">Fleet Management Platform</p>
-                  <p className="text-sm text-slate-400">Supported application workflows, releases and production issues for a platform operating across a large vessel fleet.</p>
-                </div>
-                <div>
-                  <p className="text-white font-medium text-sm">Secure File Transfer</p>
-                  <p className="text-sm text-slate-400">Isolated each vessel in its own Docker container, restricted access to authorized users and time-limited shared folders to two hours.</p>
-                </div>
-              </div>
-            </div>
 
             <div className="flex flex-wrap gap-1.5 mt-5">
               {["C#", ".NET", "PostgreSQL", "Docker", "SSH/SFTP", "JIRA", "YouTrack", "Git", "REST APIs", "OAuth/SSO"].map((t) => (
@@ -231,7 +367,7 @@ export default function Home() {
             Contact
           </h2>
           <p className="text-sm mb-5">
-            Open to technical support, application operations and maritime technology roles.
+            Open to technical support, customer support and application operations roles.
           </p>
           <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
             <a
@@ -261,7 +397,7 @@ export default function Home() {
       </main>
 
       <footer className="border-t border-slate-800/50 py-6 text-center text-xs text-slate-600">
-        &copy; 2025 Thành Trần
+        &copy; 2026 Thành Trần
       </footer>
     </div>
   );
