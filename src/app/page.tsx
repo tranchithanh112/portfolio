@@ -181,7 +181,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-2 mb-6 text-xs">
               <div className="flex-1 p-3 rounded border border-slate-700 bg-slate-800/40">
                 <p className="text-white font-medium mb-1">Vessel</p>
-                <p className="text-slate-400">LFTP client, auto retry &amp; resume</p>
+                <p className="text-slate-400">SFTP client, auto retry &amp; resume</p>
               </div>
               <div className="sm:w-28 flex sm:flex-col items-center justify-center gap-2 sm:gap-1 text-center text-cyan-400/80">
                 <span aria-hidden="true" className="text-base"><span className="sm:hidden">↕</span><span className="hidden sm:inline">↔</span></span>
@@ -215,7 +215,7 @@ export default function Home() {
                 <dt className="text-white font-medium mb-1">What I did</dt>
                 <dd>
                   <ul className="space-y-1.5 list-disc list-inside text-slate-400">
-                    <li>Built the transfer on LFTP over SFTP, which retries and resumes automatically after a dropped connection, within a timeout</li>
+                    <li>Built the transfer on SFTP, retrying and resuming automatically after a dropped connection, within a timeout</li>
                     <li>Gave each vessel its own Docker container and SSH key, so one vessel&apos;s files and access never mix with another&apos;s</li>
                     <li>Restricted access to authorized users and made shared folders expire automatically after two hours</li>
                     <li>Verified file integrity with checksums and file-size comparison</li>
